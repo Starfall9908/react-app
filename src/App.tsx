@@ -1,6 +1,7 @@
 import ListGroup from "./components/ListGroup";
 import Alert from "./components/Alert";
 import Button from "./components/Button";
+import Navbar from "./components/Navbar";
 import { useState } from "react";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
 
   return (
     <div>
+      <Navbar />
       <ListGroup
         items={items}
         heading="Stars"
