@@ -1,12 +1,11 @@
-import ListGroup from "./components/ListGroup";
 import Alert from "./components/Alert";
 import Button from "./components/Button";
-import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import ListGroup from "./components/ListGroup";
 import Music from "./pages/Music";
-import Contacts from "./pages/Contacts";
 import Name1 from "./pages/Name1";
 import Name2 from "./pages/Name2";
-import Home from "./pages/Home";
+import NavbarComp from "./components/NavbarComp";
 import { useState } from "react";
 
 function App() {
@@ -19,7 +18,7 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <NavbarComp />
       <ListGroup
         items={items}
         heading="Stars"

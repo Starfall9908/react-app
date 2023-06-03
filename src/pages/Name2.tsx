@@ -1,5 +1,11 @@
-const Name2 = () => {
-  return <h1>Name2</h1>;
-};
+import React, { Component } from "react";
 
-export default Name2;
+export default class Name2 extends Component {
+  render() {
+    return (
+      <div>
+        <h1>Name2</h1>
+      </div>
+    );
+  }
+}
