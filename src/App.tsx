@@ -1,10 +1,6 @@
 import Alert from "./components/Alert";
 import Button from "./components/Button";
-import Home from "./pages/Home";
 import ListGroup from "./components/ListGroup";
-import Music from "./pages/Music";
-import Name1 from "./pages/Name1";
-import Name2 from "./pages/Name2";
 import NavbarComp from "./components/NavbarComp";
 import { useState } from "react";
 
