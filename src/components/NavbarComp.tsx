@@ -1,13 +1,13 @@
 import Container from "react-bootstrap/Container";
+import Home from "../pages/Home";
+import Music from "../pages/Music";
+import Name1 from "../pages/Name1";
+import Name2 from "../pages/Name2";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { Link } from "react-router-dom";
-import Home from "../pages/Home";
-import Music from "../pages/Music";
-import Name1 from "../pages/Name1";
-import Name2 from "../pages/Name2";
 
 const NavbarComp = () => {
   return (
