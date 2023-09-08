@@ -1,0 +1,43 @@
+:root {
+    --white: #fff;
+    --active-color: #9b5d31;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+}
+
+/*alphabetical order from here*/
+
+.artist{
+    font-weight: 300;
+    margin-top: 0;
+}
+
+.artwork{
+    border-radius: 120px;
+    display: block;
+    height: 200px;
+    margin: auto;
+    width: 200px;
+}
+
+.audioPlayer {
+    border-radius: 20px;
+    box-shadow: 0 28px 28px rgba(0, 0, 0, 0.2);
+    color: var(--white);
+    margin: auto;
+    max-width: 350px;
+    padding: 24px;
+
+}
+
+.title {
+    font-weight: 700;
+    margin-bottom: 4px;
+}

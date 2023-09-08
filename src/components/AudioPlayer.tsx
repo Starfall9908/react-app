@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import "../styling/AudioPlayer.css";
 
 const AudioPlayer = ({ tracks }) => {
   const [trackIndex, setTrackIndex] = useState(0);

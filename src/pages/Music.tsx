@@ -1,6 +1,6 @@
+import AudioPlayer from "../components/AudioPlayer";
 import React, { Component } from "react";
 import Sample3 from "../sound samples/sample3.mp3";
-import ReactAudioPlayer from "react-audio-player";
 import tracks from "../assets/tracks";
 
 export default class Music extends Component {
@@ -8,7 +8,7 @@ export default class Music extends Component {
     return (
       <>
         <h1 className="text-center">Music</h1>
-        <ReactAudioPlayer src={Sample3} controls controlsList="nodownload" />
+        <AudioPlayer tracks={tracks} />
       </>
     );
   }
