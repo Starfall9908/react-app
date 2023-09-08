@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Sample3 from "../sound samples/sample3.mp3";
 import ReactAudioPlayer from "react-audio-player";
+import tracks from "../assets/tracks";
 
 export default class Music extends Component {
   render() {
