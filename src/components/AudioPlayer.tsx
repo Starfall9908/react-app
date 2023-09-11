@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import AudioControls from "./AudioControls";
+import React, { useEffect, useState, useRef } from "react";
 import "../styling/AudioPlayer.css";
 
 const AudioPlayer = ({ tracks }) => {
@@ -23,15 +24,23 @@ const AudioPlayer = ({ tracks }) => {
   };
 
   return (
-    <div className="audioPlayer">
-      <div className="trackInfo">
-        <img
-          className="artwork"
-          src={image}
-          alt={`track artwork for ${title} by ${artist}`}
-        />
-        <h2 className="title">{title}</h2>
-        <h3 className="artist">{artist}</h3>
+    <div>
+      <div className="audioPlayer">
+        <div className="trackInfo">
+          <img
+            className="artwork"
+            src={image}
+            alt={`track artwork for ${title} by ${artist}`}
+          />
+          <h2 className="title">{title}</h2>
+          <h3 className="artist">{artist}</h3>
+          <AudioControls
+            isPlaying={isPlaying}
+            onPrevClick={toPrevTrack}
+            onNextClick={toNextTrack}
+            onPlayPauseClick={setIsPlaying}
+          />
+        </div>
       </div>
     </div>
   );

@@ -3,13 +3,19 @@
     --active-color: #9b5d31;
 }
 
-* {
+*{
     box-sizing: border-box;
 }
 
-html {
+html{
     font-family: Arial, Helvetica, sans-serif;
     height: 100%;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 /*alphabetical order from here*/
@@ -27,7 +33,30 @@ html {
     width: 200px;
 }
 
-.audioPlayer {
+.audioControls{
+    display: flex;
+        justify-content: space-between;
+    margin: 0 auto 15px;
+    width: 75%;
+}
+
+.audioControls .next svg,
+.audioControls .prev svg{
+    height: 35px;
+    width: 35px;
+}
+
+.audioControls .pause svg,
+.audioControls .play svg {
+    height: 40px;
+    width: 40px;
+}
+
+.audioControls path{
+    fill: var(--white);
+}
+
+.audioPlayer{
     border-radius: 20px;
     box-shadow: 0 28px 28px rgba(0, 0, 0, 0.2);
     color: var(--white);
@@ -37,7 +66,24 @@ html {
 
 }
 
-.title {
+.mainMusic{
+    background: var(--active-color);
+    display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 50vh;
+    transition: background 0.4s ease;
+}
+
+.title{
     font-weight: 700;
     margin-bottom: 4px;
+    margin-top: 3vh;
+}
+
+.trackInfo{
+    position: relative;
+    text-align: center;
+    z-index: 1;
 }
