@@ -1,4 +1,5 @@
 import AudioControls from "./AudioControls";
+import Backdrop from "./Backdrop";
 import React, { useEffect, useState, useRef } from "react";
 import "../styling/AudioPlayer.css";
 
@@ -15,13 +16,88 @@ const AudioPlayer = ({ tracks }) => {
 
   const { duration } = audioRef.current;
 
+  const startTimer = () => {
+    clearInterval(intervalRef.current);
+
+    intervalRef.current = setInterval(() => {
+      if (audioRef.current.ended) {
+        toNextTrack();
+      } else {
+        setTrackProgress(audioRef.current.currentTime);
+      }
+    }, [1000]);
+  };
+
+  const onScrub = (value) => {
+    clearInterval(intervalRef.current);
+    audioRef.current.currentTime = value;
+    setTrackProgress(audioRef.current.currentTime);
+  };
+
+  const onScrubEnd = () => {
+    if (!isPlaying) {
+      setIsPlaying(true);
+    }
+    startTimer();
+  };
+
+  //toPrevTrack and toNextTrack changes the tracks
   const toPrevTrack = () => {
-    console.log("TODO go to prev");
+    if (trackIndex - 1 < 0) {
+      setTrackIndex(tracks.length - 1);
+    } else {
+      setTrackIndex(trackIndex - 1);
+    }
   };
 
   const toNextTrack = () => {
-    console.log("TODO go to next");
+    if (trackIndex < tracks.length - 1) {
+      setTrackIndex(trackIndex + 1);
+    } else {
+      setTrackIndex(0);
+    }
   };
+
+  //Pause and stop function
+  useEffect(() => {
+    if (isPlaying) {
+      audioRef.current.play();
+      startTimer();
+    } else {
+      audioRef.current.pause();
+    }
+  }, [isPlaying]);
+
+  //clears the intervall when unmounting
+  useEffect(() => {
+    return () => {
+      audioRef.current.pause();
+      clearInterval(intervalRef.current);
+    };
+  }, []);
+
+  //handles the audio for when tracks is changed
+  useEffect(() => {
+    audioRef.current.pause();
+
+    audioRef.current = new Audio(audioSrc);
+    setTrackProgress(audioRef.current.currentTime);
+
+    if (isReady.current) {
+      audioRef.current.play();
+      setIsPlaying(true);
+      startTimer();
+    } else {
+      isReady.current = true;
+    }
+  }, [trackIndex]);
+
+  const currentPercentage = duration
+    ? `${(trackProgress / duration) * 100}%`
+    : "0%";
+  const trackStyling = `
+    -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #fff), color-stop(${currentPercentage}, #777))
+  `;
 
   return (
     <div>
@@ -40,7 +116,24 @@ const AudioPlayer = ({ tracks }) => {
             onNextClick={toNextTrack}
             onPlayPauseClick={setIsPlaying}
           />
+          <input
+            type="range"
+            value={trackProgress}
+            step="1"
+            min="0"
+            max={duration ? duration : `${duration}`}
+            className="progress"
+            onChange={(e) => onScrub(e.target.value)}
+            onMouseUp={onScrubEnd}
+            onKeyUp={onScrubEnd}
+            style={{ background: trackStyling }}
+          />
         </div>
+        <Backdrop
+          trackIndex={trackIndex}
+          activeColor={color}
+          isPlaying={isPlaying}
+        />
       </div>
     </div>
   );

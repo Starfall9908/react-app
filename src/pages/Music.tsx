@@ -6,10 +6,11 @@ import "../styling/AudioPlayer.css";
 export default class Music extends Component {
   render() {
     return (
-      <div className="mainMusic">
+      <>
+        <style>{"body {background: var(--active-color);}"}</style>
         <h1 className="text-center">Music</h1>
         <AudioPlayer tracks={tracks} />
-      </div>
+      </>
     );
   }
 }

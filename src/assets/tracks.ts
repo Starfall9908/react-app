@@ -11,20 +11,20 @@ export default [
     artist: "Artist 1",
     audioSrc: sample,
     image: imgSrc,
-    color: "#00aeb0"
+    color: "#9b5d31"
   },
   {
     title: "Sample 2",
     artist: "Artist 2",
     audioSrc: sample2,
     image: imgSrc2,
-    color: "#ffb77a"
+    color: "#1fd4f1"
   },
   {
     title: "Sample 3",
     artist: "Sample 3",
     audioSrc: sample3,
     image: imgSrc3,
-    color: "#5f9fff"
+    color: "#9f0235"
   }
 ];

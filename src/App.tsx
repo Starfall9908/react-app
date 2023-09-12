@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       <NavbarComp />
-      <ListGroup
+      {/*<ListGroup
         items={items}
         heading="Stars"
         onSelectItem={handleSelectItem}
@@ -23,7 +23,7 @@ function App() {
       {alertVisible && (
         <Alert onClose={() => setAlertVisisbility(false)}>My Alert</Alert>
       )}
-      <Button onClick={() => setAlertVisisbility(true)}>Big Button</Button>
+      <Button onClick={() => setAlertVisisbility(true)}>Big Button</Button>*/}
     </>
   );
 }
