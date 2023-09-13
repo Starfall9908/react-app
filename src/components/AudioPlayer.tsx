@@ -1,6 +1,6 @@
 import AudioControls from "./AudioControls";
 import Backdrop from "./Backdrop";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../styling/AudioPlayer.css";
 
 const AudioPlayer = ({ tracks }) => {
@@ -16,6 +16,14 @@ const AudioPlayer = ({ tracks }) => {
 
   const { duration } = audioRef.current;
 
+  const currentPercentage = duration
+    ? `${(trackProgress / duration) * 100}%`
+    : "0%";
+  const trackStyling = `
+    -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #fff), color-stop(${currentPercentage}, #777))
+  `;
+
+  //Music timer
   const startTimer = () => {
     clearInterval(intervalRef.current);
 
@@ -25,10 +33,10 @@ const AudioPlayer = ({ tracks }) => {
       } else {
         setTrackProgress(audioRef.current.currentTime);
       }
-    }, [1000]);
+    }, 1000);
   };
 
-  const onScrub = (value) => {
+  const onScrub = (value: number) => {
     clearInterval(intervalRef.current);
     audioRef.current.currentTime = value;
     setTrackProgress(audioRef.current.currentTime);
@@ -41,8 +49,8 @@ const AudioPlayer = ({ tracks }) => {
     startTimer();
   };
 
-  //toPrevTrack and toNextTrack changes the tracks
   const toPrevTrack = () => {
+    setIsPlaying(false);
     if (trackIndex - 1 < 0) {
       setTrackIndex(tracks.length - 1);
     } else {
@@ -51,6 +59,7 @@ const AudioPlayer = ({ tracks }) => {
   };
 
   const toNextTrack = () => {
+    setIsPlaying(false);
     if (trackIndex < tracks.length - 1) {
       setTrackIndex(trackIndex + 1);
     } else {
@@ -58,7 +67,6 @@ const AudioPlayer = ({ tracks }) => {
     }
   };
 
-  //Pause and stop function
   useEffect(() => {
     if (isPlaying) {
       audioRef.current.play();
@@ -68,15 +76,6 @@ const AudioPlayer = ({ tracks }) => {
     }
   }, [isPlaying]);
 
-  //clears the intervall when unmounting
-  useEffect(() => {
-    return () => {
-      audioRef.current.pause();
-      clearInterval(intervalRef.current);
-    };
-  }, []);
-
-  //handles the audio for when tracks is changed
   useEffect(() => {
     audioRef.current.pause();
 
@@ -84,57 +83,55 @@ const AudioPlayer = ({ tracks }) => {
     setTrackProgress(audioRef.current.currentTime);
 
     if (isReady.current) {
-      audioRef.current.play();
-      setIsPlaying(true);
+      audioRef.current.pause();
+      setIsPlaying(false);
       startTimer();
     } else {
-      isReady.current = true;
+      isReady.current = false;
     }
   }, [trackIndex]);
 
-  const currentPercentage = duration
-    ? `${(trackProgress / duration) * 100}%`
-    : "0%";
-  const trackStyling = `
-    -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #fff), color-stop(${currentPercentage}, #777))
-  `;
+  useEffect(() => {
+    return () => {
+      audioRef.current.pause();
+      clearInterval(intervalRef.current);
+    };
+  }, []);
 
   return (
-    <div>
-      <div className="audioPlayer">
-        <div className="trackInfo">
-          <img
-            className="artwork"
-            src={image}
-            alt={`track artwork for ${title} by ${artist}`}
-          />
-          <h2 className="title">{title}</h2>
-          <h3 className="artist">{artist}</h3>
-          <AudioControls
-            isPlaying={isPlaying}
-            onPrevClick={toPrevTrack}
-            onNextClick={toNextTrack}
-            onPlayPauseClick={setIsPlaying}
-          />
-          <input
-            type="range"
-            value={trackProgress}
-            step="1"
-            min="0"
-            max={duration ? duration : `${duration}`}
-            className="progress"
-            onChange={(e) => onScrub(e.target.value)}
-            onMouseUp={onScrubEnd}
-            onKeyUp={onScrubEnd}
-            style={{ background: trackStyling }}
-          />
-        </div>
-        <Backdrop
-          trackIndex={trackIndex}
-          activeColor={color}
+    <div className="audioPlayer">
+      <div className="trackInfo">
+        <img
+          className="artwork"
+          src={image}
+          alt={`track artwork for ${title} by ${artist}`}
+        />
+        <h2 className="title">{title}</h2>
+        <h3 className="artist">{artist}</h3>
+        <AudioControls
           isPlaying={isPlaying}
+          onPrevClick={toPrevTrack}
+          onNextClick={toNextTrack}
+          onPlayPauseClick={setIsPlaying}
+        />
+        <input
+          type="range"
+          value={trackProgress}
+          step="1"
+          min="0"
+          max={duration ? duration : `${duration}`}
+          className="progress"
+          onChange={(e) => onScrub(e.target.value)}
+          onMouseUp={onScrubEnd}
+          onKeyUp={onScrubEnd}
+          style={{ background: trackStyling }}
         />
       </div>
+      <Backdrop
+        trackIndex={trackIndex}
+        activeColor={color}
+        isPlaying={isPlaying}
+      />
     </div>
   );
 };

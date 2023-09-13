@@ -1,7 +1,7 @@
 import React from "react";
-import { ReactComponent as Next } from "../assets/images/next.svg";
-import { ReactComponent as Pause } from "../assets/images/pause.svg";
 import { ReactComponent as Play } from "../assets/images/play.svg";
+import { ReactComponent as Pause } from "../assets/images/pause.svg";
+import { ReactComponent as Next } from "../assets/images/next.svg";
 import { ReactComponent as Prev } from "../assets/images/prev.svg";
 
 const AudioControls = ({
@@ -23,8 +23,8 @@ const AudioControls = ({
       <button
         type="button"
         className="pause"
-        aria-label="Pause"
         onClick={() => onPlayPauseClick(false)}
+        aria-label="Pause"
       >
         <Pause />
       </button>
@@ -32,8 +32,8 @@ const AudioControls = ({
       <button
         type="button"
         className="play"
-        aria-label="Play"
         onClick={() => onPlayPauseClick(true)}
+        aria-label="Play"
       >
         <Play />
       </button>
