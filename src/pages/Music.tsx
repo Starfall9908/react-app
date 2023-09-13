@@ -1,13 +1,16 @@
+import AudioPlayer from "../components/AudioPlayer";
 import React, { Component } from "react";
-import Sample3 from "../sound samples/sample3.mp3";
-import ReactAudioPlayer from "react-audio-player";
+import tracks from "../assets/tracks";
+import "../styling/AudioPlayer.css";
+import "../styling/Music.css";
 
 export default class Music extends Component {
   render() {
     return (
       <>
-        <h1 className="text-center">Music</h1>
-        <ReactAudioPlayer src={Sample3} controls controlsList="nodownload" />
+        <style>{"body {background: var(--active-color);}"}</style>
+        <h1 className="text-center musicTitle">Music</h1>
+        <AudioPlayer tracks={tracks} />
       </>
     );
   }
