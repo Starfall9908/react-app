@@ -1,11 +1,15 @@
-import React, { Component } from "react";
+import React, { MouseEventHandler } from "react";
 
-export default class Name2 extends Component {
-  render() {
-    return (
-      <div>
-        <h1 className="text-center">Name2</h1>
-      </div>
-    );
-  }
+function Name2(props: {
+  toggleMode: MouseEventHandler<HTMLInputElement>;
+  mode: string;
+}) {
+  let textMode = props.mode === "light" ? "black" : "white";
+  return (
+    <div>
+      <h1 className="text-center">Name2</h1>
+    </div>
+  );
 }
+
+export default Name2;

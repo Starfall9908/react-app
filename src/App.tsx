@@ -1,29 +1,47 @@
-import Alert from "./components/Alert";
-import Button from "./components/Button";
-import ListGroup from "./components/ListGroup";
+import Home from "./pages/Home";
+import Music from "./pages/Music";
+import Name1 from "./pages/Name1";
+import Name2 from "./pages/Name2";
 import NavbarComp from "./components/NavbarComp";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { useState } from "react";
 
 function App() {
-  let items = ["Vega", "Sirius", "Rigel", "Betelgeus", "Antares"];
-  const handleSelectItem = (item: string) => {
-    console.log(item);
-  };
+  const [mode, setMode] = useState("light");
 
-  const [alertVisible, setAlertVisisbility] = useState(false);
+  const toggleMode = () => {
+    if (mode === "light") {
+      setMode("dark");
+      document.body.style.backgroundColor = "black";
+    } else {
+      setMode("light");
+      document.body.style.backgroundColor = "white";
+    }
+  };
 
   return (
     <>
-      <NavbarComp />
-      {/*<ListGroup
-        items={items}
-        heading="Stars"
-        onSelectItem={handleSelectItem}
-      />
-      {alertVisible && (
-        <Alert onClose={() => setAlertVisisbility(false)}>My Alert</Alert>
-      )}
-      <Button onClick={() => setAlertVisisbility(true)}>Big Button</Button>*/}
+      <NavbarComp mode={mode} toggleMode={toggleMode} />
+      <Router>
+        <Routes>
+          <Route
+            path="/music"
+            element={<Music mode={mode} toggleMode={toggleMode} />}
+          />
+          <Route
+            path="/name1"
+            element={<Name1 mode={mode} toggleMode={toggleMode} />}
+          />
+          <Route
+            path="/name2"
+            element={<Name2 mode={mode} toggleMode={toggleMode} />}
+          />
+          <Route
+            path="/"
+            element={<Home mode={mode} toggleMode={toggleMode} />}
+          />
+        </Routes>
+      </Router>
     </>
   );
 }
