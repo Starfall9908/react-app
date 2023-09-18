@@ -1,18 +1,16 @@
 import AudioPlayer from "../components/AudioPlayer";
 import React, { MouseEventHandler } from "react";
+import styles from "../styling/Music.module.css";
 import tracks from "../assets/tracks";
 import "../styling/AudioPlayer.css";
-import "../styling/Music.css";
 
-function Music(props: {
-  toggleMode: MouseEventHandler<HTMLInputElement>;
-  mode: string;
-}) {
-  let textMode = props.mode === "light" ? "black" : "white";
+function Music() {
   return (
     <>
-      <style>{"body {background: var(--active-color);}"}</style>
-      <h1 className="text-center musicTitle">Music</h1>
+      <style>
+        {"body {background-color: var(--active-color) !important;}"}
+      </style>
+      <h1 className={`text-center ${styles.musicTitle}`}>Music</h1>
       <AudioPlayer tracks={tracks} />
     </>
   );

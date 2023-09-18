@@ -13,21 +13,20 @@ function App() {
     if (mode === "light") {
       setMode("dark");
       document.body.style.backgroundColor = "black";
+      console.log("black");
     } else {
       setMode("light");
       document.body.style.backgroundColor = "white";
+      console.log("white");
     }
   };
 
   return (
     <>
-      <NavbarComp mode={mode} toggleMode={toggleMode} />
       <Router>
+        <NavbarComp mode={mode} toggleMode={toggleMode} />
         <Routes>
-          <Route
-            path="/music"
-            element={<Music mode={mode} toggleMode={toggleMode} />}
-          />
+          <Route path="/music" element={<Music />} />
           <Route
             path="/name1"
             element={<Name1 mode={mode} toggleMode={toggleMode} />}

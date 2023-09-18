@@ -4,6 +4,8 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 import { MouseEventHandler } from "react";
+import "../styling/Navbar.css";
+import { Dropdown } from "react-bootstrap";
 
 const NavbarComp = (props: {
   toggleMode: MouseEventHandler<HTMLInputElement>;
@@ -11,10 +13,14 @@ const NavbarComp = (props: {
 }) => {
   let textMode = props.mode === "light" ? "black" : "white";
 
+  document.documentElement.style.setProperty("--mode", textMode);
+
   return (
     <Navbar bg={props.mode}>
       <Container fluid>
-        <Navbar.Brand href="/">Portfolio</Navbar.Brand>
+        <Navbar.Brand className={`text-${textMode}`} href="/">
+          Portfolio
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
@@ -24,7 +30,11 @@ const NavbarComp = (props: {
             <Nav.Link className={`text-${textMode}`} as={Link} to={"/music"}>
               Music
             </Nav.Link>
-            <NavDropdown title="Contact us" id="basic-nav-dropdown">
+            <NavDropdown
+              title={<span className={`text-${textMode}`}>Contact us</span>}
+              id="basic-nav-dropdown"
+              menuVariant={props.mode}
+            >
               <NavDropdown.Item
                 className={`text-${textMode}`}
                 as={Link}
@@ -54,7 +64,7 @@ const NavbarComp = (props: {
               className={`form-check-label text-${textMode}`}
               htmlFor="flexSwitchCheckDefault"
             >
-              {props.mode === "Light"
+              {props.mode === "light"
                 ? "Enable dark mode"
                 : "Enable light mode"}
             </label>

@@ -7,7 +7,7 @@ function Name2(props: {
   let textMode = props.mode === "light" ? "black" : "white";
   return (
     <div>
-      <h1 className="text-center">Name2</h1>
+      <h1 className={`text-center text-${textMode}`}>Name2</h1>
     </div>
   );
 }

@@ -18,7 +18,7 @@ function Home(props: {
 
   return (
     <div>
-      <h1 className="text-center">Home</h1>
+      <h1 className={`text-center text-${textMode}`}>Home</h1>
       <ListGroup
         items={items}
         heading="Stars"
