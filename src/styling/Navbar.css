@@ -5,3 +5,8 @@
 .dropdown-toggle::after {
     color: var(--mode);
 }
+
+.switch-box{
+    position: relative;
+        right: 0;
+}

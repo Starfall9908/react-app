@@ -23,6 +23,7 @@ function Home(props: {
         items={items}
         heading="Stars"
         onSelectItem={handleSelectItem}
+        textMode={textMode}
       />
       {alertVisible && (
         <Alert onClose={() => setAlertVisisbility(false)}>My Alert</Alert>

@@ -5,7 +5,6 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 import { MouseEventHandler } from "react";
 import "../styling/Navbar.css";
-import { Dropdown } from "react-bootstrap";
 
 const NavbarComp = (props: {
   toggleMode: MouseEventHandler<HTMLInputElement>;
@@ -51,7 +50,7 @@ const NavbarComp = (props: {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <div className="form-check form-switch">
+          <div className="form-check form-switch position-absolute top-25 end-0 me-3">
             <input
               className="form-check-input"
               type="checkbox"
